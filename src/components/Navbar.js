@@ -1,25 +1,25 @@
-import React from 'react';
-import '../App.css';
+import React from "react";
+import "../App.css";
 
 const Navbar = () => {
-    return (
-        <div class="nav">
-        <ul id="navbar">
+  return (
+    <div class="nav">
+      <ul id="navbar">
+        <li class="navitem">
+          <a href="About.jsx">About Me</a>
+        </li>
+        <li class="navitem">
+          <a href="Metrics.jsx">Metrics</a>
+        </li>
+        <li class="navitem">
+          <a href="Tracking.jsx">Tracking</a>
           <li class="navitem">
-            <a href="aboutme.html">About Me</a>
+            <a href="Home.jsx">Home</a>
           </li>
-          <li class="navitem">
-            <a href="metrics.html">Metrics</a>
-          </li>
-          <li class="navitem">
-            <a href="tracking.html">Tracking</a>
-            <li class="navitem">
-              <a href="home.html">Home</a>
-            </li>
-          </li>
-        </ul>
-      </div>
-    )
-}
+        </li>
+      </ul>
+    </div>
+  );
+};
 
 export default Navbar;
