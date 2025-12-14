@@ -32,15 +32,13 @@ const Tracking = () => {
     timeFrom.max = sleepFrom;
     timeTo.min = sleepTo;
     timeTo.max = sleepFrom;
-    
+
     confirmation.innerHTML = "Sleep time set from " + sleepFrom + " to " + sleepTo;
   };
 
   // function when form is submitted
   const submitTracking = async (data) => {
     data.preventDefault();
-    console.log(data.time_from);
-    console.log(data.time_to);
     const timeData = new FormData(data.target);
 
     const timeEntry = {
