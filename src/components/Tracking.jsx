@@ -27,13 +27,13 @@ const Tracking = () => {
       to: timeData.get("to"),
       activity: timeData.get("activity"),
       category: timeData.get("category"),
-      fun_level: timeData.get("fun-level"),
-      meaning_level: timeData.get("meaning-level"),
+      fun_level: Number(timeData.get("fun-level")),
+      meaning_level: Number(timeData.get("meaning-level")),
     };
     const { error } = await supabase.from("time_tracker").insert([timeEntry]);
 
     if (error) {
-      console.error("Error inserting time entry:", error);
+      console.log("Error inserting time entry:", error);
     }
     data.target.reset();
   };
