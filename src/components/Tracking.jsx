@@ -74,13 +74,13 @@ const Tracking = () => {
         <input type="time" id="from" name="from" step="1800" required />
         <br />
         <label for="to">Time Block End:</label>
-        <input type="time" id="to" name="from" step="1800" required />
+        <input type="time" id="to" name="to" step="1800" required />
         <br />
         <label for="activity">Activity:</label>
-        <input type="text" id="activity" required />
+        <input type="text" id="activity" name="activity" required />
         <br />
         <label for="category">Category:</label>
-        <select id="category" required>
+        <select id="category" name="category" required>
           <option value="career">Career</option>
           <option value="financial">Financial</option>
           <option value="spiritual">Spiritual</option>
@@ -90,11 +90,11 @@ const Tracking = () => {
           <option value="social">Social</option>
         </select>
         <br />
-        <label for="fun-level">Fun Level (1-4):</label>
-        <input type="number" id="fun-level" min="1" max="4" required />
+        <label for="fun_level">Fun Level (1-4):</label>
+        <input type="number" id="fun_level" name="fun_level" min="1" max="4" required />
         <br />
-        <label for="meaning-level">Meaning Level (1-4):</label>
-        <input type="number" id="meaning-level" min="1" max="4" required />
+        <label for="meaning_level">Meaning Level (1-4):</label>
+        <input type="number" id="meaning_level" name="meaning_level" min="1" max="4" required />
         <br />
         <button type="submit">Submit</button>
       </form>
