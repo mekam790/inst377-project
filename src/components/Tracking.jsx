@@ -40,7 +40,7 @@ const Tracking = () => {
   };
 
   const getData = async () => {
-    onsole.log("getData called");
+    console.log("getData called");
     // const categoryDisplay = document.getElementById("current-category");
     // const timesheet = document
     //   .getElementById("timesheet")
