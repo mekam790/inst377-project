@@ -18,12 +18,16 @@ const Tracking = () => {
   const showTime =
     date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 
-    const categoryDisplay = document.getElementById("current-category");
   // function when form is submitted
   const submitTracking = async (data) => {
-    const timesheet = document.getElementById("timesheet").getElementsByTagName('tbody')[0];
+    const categoryDisplay = document.getElementById("current-category");
+    const timesheet = document
+      .getElementById("timesheet")
+      .getElementsByTagName("tbody")[0];
     data.preventDefault();
+
     const timeData = new FormData(data.target);
+    console.log(timeData);
 
     const timeBlock = timesheet.insertRow();
     const timeCell = timeBlock.insertCell(0);
@@ -33,7 +37,7 @@ const Tracking = () => {
     activityCell.innerHTML = timeData.get("activity");
     categoryCell.innerHTML = timeData.get("category");
 
-    categoryDisplay.innerHTML = timeData.get("category")
+    categoryDisplay.innerHTML = timeData.get("category");
     const timeEntry = {
       from: timeData.get("from"),
       to: timeData.get("to"),
@@ -126,17 +130,16 @@ const Tracking = () => {
       <div id="timesheetbox">
         <h2>Your Time Entries</h2>
         <div id="entries-list">
-            <table id="timesheet">
-                <thead>
-                    <tr>
-                    <th>Time</th>
-                    <th>Activity</th>
-                    <th>Category</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
+          <table id="timesheet">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Activity</th>
+                <th>Category</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
         </div>
       </div>
     </>
