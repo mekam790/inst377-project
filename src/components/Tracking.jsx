@@ -23,8 +23,8 @@ const Tracking = () => {
     const timeData = new FormData(data.target);
 
     const timeEntry = {
-        time_from: timeData.get("from"),
-        time_to: timeData.get("to"),
+        from: timeData.get("from"),
+        to: timeData.get("to"),
         activity: timeData.get("activity"),
         category: timeData.get("category"),
         fun_level: parseInt(timeData.get("fun-level")),
@@ -32,7 +32,7 @@ const Tracking = () => {
     };
 
     const { error } = await supabase
-    .from("time-tracker")
+    .from("time_tracker")
     .insert([timeEntry]);
 
     if (error) {
