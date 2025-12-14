@@ -1,8 +1,16 @@
 import React from "react";
 import "../App.css";
 import Navbar from "./Navbar";
+import moment from "moment";
+import { createClient } from "@supabase/supabase-js";
 
 const Tracking = () => {
+  // supabase setup
+  const supabaseUrl = "https://pzqupoelaedeknqrrcay.supabase.co";
+  const supabaseKey =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB6cXVwb2VsYWVkZWtucXJyY2F5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU3MzY4NDQsImV4cCI6MjA4MTMxMjg0NH0.vFWkPmHRbyCM6gMl9ZrrRUFYN5rs1GK8nzxlJ1liMV8";
+  const supabase = createClient(supabaseUrl, supabaseKey);
+
   // get current date and time
   const date = new Date();
   const showDate =
@@ -10,6 +18,16 @@ const Tracking = () => {
   const showTime =
     date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 
+  const submitTracking = async (data) => {
+    // insert current data var and tracking data into supabase
+    const { data: response, error } = await supabase
+      .from("time-tracker")
+      .insert([data]);
+    if (error) {
+      console.error("Error submitting form:", error);
+      return;
+    }
+  };
   return (
     <>
       <div class="header">
@@ -26,20 +44,22 @@ const Tracking = () => {
           meaning on a scale of 1-4.
         </p>
         <p>
-            Categories:
-            - Career can mean your work if you are employed, or school if you are a student, so the time you spend in classes or studying.
+          Categories: - Career can mean your work if you are employed, or school
+          if you are a student, so the time you spend in classes or studying.
         </p>
       </div>
       <div id="date">
+        {/* not dynamic yet*/}
         <h3>Current Date: {showDate}</h3>
       </div>
       <div id="timebox">
         <h3>{showTime}</h3>
         <h5 id="current-category"></h5>
       </div>
-      <form id="tracking-form">
+      <form id="tracking-form" action={submitTracking}>
         <label for="time-block">Time Block:</label>
-        <input type="text" id="from"required /> to <input type="text" id="to" required />
+        <input type="text" id="from" required /> to{" "}
+        <input type="text" id="to" required />
         <br />
         <label for="activity">Activity:</label>
         <input type="text" id="activity" required />
@@ -54,7 +74,7 @@ const Tracking = () => {
           <option value="family">Family</option>
           <option value="social">Social</option>
         </select>
-        <br/>
+        <br />
         <label for="fun-level">Fun Level (1-4):</label>
         <input type="number" id="fun-level" min="1" max="4" required />
         <br />
