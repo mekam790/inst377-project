@@ -32,7 +32,7 @@ const Tracking = () => {
     };
 
     const { error } = await supabase
-    .from("time_tracking")
+    .from("time_tracker")
     .insert([timeEntry]);
 
     if (error) {
