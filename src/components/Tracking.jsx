@@ -20,11 +20,12 @@ const Tracking = () => {
 
   const submitTracking = async (data) => {
     // insert current data var and tracking data into supabase
-    const { data: response, error } = await supabase
+    const { error } = await supabase
       .from("time-tracker")
       .insert([data]);
     if (error) {
       console.log("Error submitting form:", error);
+      console.log("Data:", data);
       return;
     }
   };
