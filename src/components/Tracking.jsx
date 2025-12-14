@@ -51,15 +51,15 @@ const Tracking = () => {
     
     console.log(time_tracker);
 
-    const timeBlock = timesheet.insertRow();
-    const timeCell = timeBlock.insertCell(0);
-    const activityCell = timeBlock.insertCell(1);
-    const categoryCell = timeBlock.insertCell(2);
-    timeCell.innerHTML = timeData.get("from") + " - " + timeData.get("to");
-    activityCell.innerHTML = timeData.get("activity");
-    categoryCell.innerHTML = timeData.get("category");
+    // const timeBlock = timesheet.insertRow();
+    // const timeCell = timeBlock.insertCell(0);
+    // const activityCell = timeBlock.insertCell(1);
+    // const categoryCell = timeBlock.insertCell(2);
+    // timeCell.innerHTML = timeData.get("from") + " - " + timeData.get("to");
+    // activityCell.innerHTML = timeData.get("activity");
+    // categoryCell.innerHTML = timeData.get("category");
 
-    categoryDisplay.innerHTML = timeData.get("category");
+    // categoryDisplay.innerHTML = timeData.get("category");
   };
   return (
     <>
