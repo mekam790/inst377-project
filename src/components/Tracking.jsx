@@ -20,24 +20,8 @@ const Tracking = () => {
 
   // function when form is submitted
   const submitTracking = async (data) => {
-    const categoryDisplay = document.getElementById("current-category");
-    const timesheet = document
-      .getElementById("timesheet")
-      .getElementsByTagName("tbody")[0];
-    data.preventDefault();
-
     const timeData = new FormData(data.target);
     console.log(timeData);
-
-    const timeBlock = timesheet.insertRow();
-    const timeCell = timeBlock.insertCell(0);
-    const activityCell = timeBlock.insertCell(1);
-    const categoryCell = timeBlock.insertCell(2);
-    timeCell.innerHTML = timeData.get("from") + " - " + timeData.get("to");
-    activityCell.innerHTML = timeData.get("activity");
-    categoryCell.innerHTML = timeData.get("category");
-
-    categoryDisplay.innerHTML = timeData.get("category");
     const timeEntry = {
       from: timeData.get("from"),
       to: timeData.get("to"),
@@ -51,7 +35,31 @@ const Tracking = () => {
     if (error) {
       console.log("Error inserting time entry:", error);
     }
+    await getData();
     data.target.reset();
+  };
+
+  const getData = async () => {
+    const categoryDisplay = document.getElementById("current-category");
+    const timesheet = document
+      .getElementById("timesheet")
+      .getElementsByTagName("tbody")[0];
+
+    let { data: time_tracker, error } = await supabase
+      .from("time_tracker")
+      .select("*");
+    
+    console.log(time_tracker);
+
+    const timeBlock = timesheet.insertRow();
+    const timeCell = timeBlock.insertCell(0);
+    const activityCell = timeBlock.insertCell(1);
+    const categoryCell = timeBlock.insertCell(2);
+    timeCell.innerHTML = timeData.get("from") + " - " + timeData.get("to");
+    activityCell.innerHTML = timeData.get("activity");
+    categoryCell.innerHTML = timeData.get("category");
+
+    categoryDisplay.innerHTML = timeData.get("category");
   };
   return (
     <>
