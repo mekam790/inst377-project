@@ -129,12 +129,9 @@ const Tracking = () => {
             <table id="timesheet">
                 <thead>
                     <tr>
-                    <th>From</th>
-                    <th>To</th>
+                    <th>Time</th>
                     <th>Activity</th>
                     <th>Category</th>
-                    <th>Fun Level</th>
-                    <th>Meaning Level</th>
                     </tr>
                 </thead>
                 <tbody>
