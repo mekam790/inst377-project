@@ -23,20 +23,18 @@ const Tracking = () => {
     const timeData = new FormData(data.target);
 
     const timeEntry = {
-        from: timeData.get("from"),
-        to: timeData.get("to"),
-        activity: timeData.get("activity"),
-        category: timeData.get("category"),
-        fun_level: parseInt(timeData.get("fun-level")),
-        meaning_level: parseInt(timeData.get("meaning-level")),
+      from: timeData.get("from"),
+      to: timeData.get("to"),
+      activity: timeData.get("activity"),
+      category: timeData.get("category"),
+      fun_level: timeData.get("fun-level"),
+      meaning_level: timeData.get("meaning-level"),
     };
 
-    const { error } = await supabase
-    .from("time_tracker")
-    .insert([timeEntry]);
+    const { error } = await supabase.from("time_tracker").insert([timeEntry]);
 
     if (error) {
-        console.error("Error inserting time entry:", error);
+      console.error("Error inserting time entry:", error);
     }
     data.target.reset();
   };
@@ -91,10 +89,24 @@ const Tracking = () => {
         </select>
         <br />
         <label for="fun_level">Fun Level (1-4):</label>
-        <input type="number" id="fun_level" name="fun_level" min="1" max="4" required />
+        <input
+          type="number"
+          id="fun_level"
+          name="fun_level"
+          min="1"
+          max="4"
+          required
+        />
         <br />
         <label for="meaning_level">Meaning Level (1-4):</label>
-        <input type="number" id="meaning_level" name="meaning_level" min="1" max="4" required />
+        <input
+          type="number"
+          id="meaning_level"
+          name="meaning_level"
+          min="1"
+          max="4"
+          required
+        />
         <br />
         <button type="submit">Submit</button>
       </form>
