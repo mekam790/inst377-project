@@ -19,17 +19,26 @@ const Tracking = () => {
     date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 
   const submitTracking = async (data) => {
-    // insert current data var and tracking data into supabase
-    const {from, to, activity, category, fun_level, meaning_level} = data;
+    data.preventDefault();
+    const timeData = new FormData(data.target);
+
+    const timeEntry = {
+        time_from: timeData.get("from"),
+        time_to: timeData.get("to"),
+        activity: timeData.get("activity"),
+        category: timeData.get("category"),
+        fun_level: parseInt(timeData.get("fun-level")),
+        meaning_level: parseInt(timeData.get("meaning-level")),
+    };
 
     const { error } = await supabase
-      .from("time-tracker")
-      .insert({from, to, activity, category, fun_level, meaning_level});
+    .from("time_tracking")
+    .insert([timeEntry]);
+
     if (error) {
-      console.log("Error submitting form:", error);
-      console.log("Data:", data);
-      return;
+        console.error("Error inserting time entry:", error);
     }
+    data.target.reset();
   };
   return (
     <>
@@ -59,13 +68,13 @@ const Tracking = () => {
         <h3>{showTime}</h3>
         <h5 id="current-category"></h5>
       </div>
-      <form id="tracking-form" onsubmit={submitTracking}>
+      <form id="tracking-form" onSubmit={submitTracking}>
         {/* can have min and max attributes, use to set restrictions when user first inputs sleep time*/}
         <label for="from">Time Block Start:</label>
-        <input type="time" id="from" step="1800" required />
+        <input type="time" id="from" name="from" step="1800" required />
         <br />
         <label for="to">Time Block End:</label>
-        <input type="time" id="to" step="1800" required />
+        <input type="time" id="to" name="from" step="1800" required />
         <br />
         <label for="activity">Activity:</label>
         <input type="text" id="activity" required />
