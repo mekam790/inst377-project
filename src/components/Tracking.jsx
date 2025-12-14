@@ -18,15 +18,34 @@ const Tracking = () => {
   const showTime =
     date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 
+  // function to get sleep time and set min and max for time inputs
+  const getSleepTime = (data) => {
+    const confirmation = document.getElementById("sleep_confirm");
+    data.preventDefault();
+    const sleepData = new FormData(data.target);
+    const sleepFrom = sleepData.get("sleep_from");
+    const sleepTo = sleepData.get("sleep_to");
+    const timeFrom = document.getElementById("time_from");
+    const timeTo = document.getElementById("time_to");
+
+    timeFrom.min = sleepTo;
+    timeFrom.max = sleepFrom;
+    timeTo.min = sleepTo;
+    timeTo.max = sleepFrom;
+    
+    confirmation.innerHTML = "Sleep time set from " + sleepFrom + " to " + sleepTo;
+  };
+
   // function when form is submitted
   const submitTracking = async (data) => {
     data.preventDefault();
-
+    console.log(data.time_from);
+    console.log(data.time_to);
     const timeData = new FormData(data.target);
 
     const timeEntry = {
-      from: timeData.get("from"),
-      to: timeData.get("to"),
+      from: timeData.get("time_from"),
+      to: timeData.get("time_to"),
       activity: timeData.get("activity"),
       category: timeData.get("category"),
       fun_level: Number(timeData.get("fun_level")),
@@ -48,6 +67,7 @@ const Tracking = () => {
       .getElementById("timesheet")
       .getElementsByTagName("tbody")[0];
     timesheet.innerHTML = "";
+
     const { data, error } = await supabase.from("time_tracker").select("*");
 
     if (error) {
@@ -92,6 +112,32 @@ const Tracking = () => {
         {/* not dynamic yet*/}
         <h3>Current Date: {showDate}</h3>
       </div>
+      <div id="sleepbox">
+        <h2>Sleep Time Entry</h2>
+        <p>Input your sleeping hours to restrict the hours you track.</p>
+        <form id="sleep-form" onSubmit={getSleepTime}>
+          <label for="sleep_from">Time Block Start:</label>
+          <input
+            type="time"
+            id="sleep_from"
+            name="sleep_from"
+            step="1800"
+            required
+          />
+          <br />
+          <label for="sleep_to">Time Block End:</label>
+          <input
+            type="time"
+            id="sleep_to"
+            name="sleep_to"
+            step="1800"
+            required
+          />
+          <br />
+          <button type="submit">Submit</button>
+        </form>
+        <h3 id="sleep_confirm"></h3>
+      </div>
       <div id="timebox">
         <h3>{showTime}</h3>
         <h5 id="current-category"></h5>
@@ -99,11 +145,17 @@ const Tracking = () => {
       <div id="form">
         <form id="tracking-form" onSubmit={submitTracking}>
           {/* can have min and max attributes, use to set restrictions when user first inputs sleep time*/}
-          <label for="from">Time Block Start:</label>
-          <input type="time" id="from" name="from" step="1800" required />
+          <label for="time_from">Time Block Start:</label>
+          <input
+            type="time"
+            id="time_from"
+            name="time_from"
+            step="1800"
+            required
+          />
           <br />
-          <label for="to">Time Block End:</label>
-          <input type="time" id="to" name="to" step="1800" required />
+          <label for="time_to">Time Block End:</label>
+          <input type="time" id="time_to" name="time_to" step="1800" required />
           <br />
           <label for="activity">Activity:</label>
           <input type="text" id="activity" name="activity" required />
