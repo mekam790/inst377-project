@@ -57,8 +57,10 @@ const Tracking = () => {
         <h5 id="current-category"></h5>
       </div>
       <form id="tracking-form" action={submitTracking}>
-        <label for="time-block">Time Block:</label>
-        <input type="text" id="from" required /> to{" "}
+        <label for="from">Time Block Start:</label>
+        <input type="text" id="from" required />
+        <br />
+        <label for="to">Time Block End:</label>
         <input type="text" id="to" required />
         <br />
         <label for="activity">Activity:</label>
