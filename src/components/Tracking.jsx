@@ -20,6 +20,8 @@ const Tracking = () => {
 
   // function when form is submitted
   const submitTracking = async (data) => {
+    data.preventDefault();
+    
     const timeData = new FormData(data.target);
     console.log(timeData);
     const timeEntry = {
