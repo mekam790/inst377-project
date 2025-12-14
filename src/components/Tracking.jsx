@@ -20,9 +20,11 @@ const Tracking = () => {
 
   const submitTracking = async (data) => {
     // insert current data var and tracking data into supabase
+    const {from, to, activity, category, fun_level, meaning_level} = data;
+
     const { error } = await supabase
       .from("time-tracker")
-      .insert([data]);
+      .insert({from, to, activity, category, fun_level, meaning_level});
     if (error) {
       console.log("Error submitting form:", error);
       console.log("Data:", data);
@@ -57,7 +59,7 @@ const Tracking = () => {
         <h3>{showTime}</h3>
         <h5 id="current-category"></h5>
       </div>
-      <form id="tracking-form" action={submitTracking}>
+      <form id="tracking-form" onsubmit={submitTracking}>
         {/* can have min and max attributes, use to set restrictions when user first inputs sleep time*/}
         <label for="from">Time Block Start:</label>
         <input type="time" id="from" step="1800" required />
