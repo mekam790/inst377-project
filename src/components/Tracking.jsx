@@ -23,7 +23,7 @@ const Tracking = () => {
     data.preventDefault();
 
     const timeData = new FormData(data.target);
-    console.log(timeData);
+
     const timeEntry = {
       from: timeData.get("from"),
       to: timeData.get("to"),
@@ -47,7 +47,7 @@ const Tracking = () => {
     const timesheet = document
       .getElementById("timesheet")
       .getElementsByTagName("tbody")[0];
-
+    timesheet.innerHTML = "";
     const { data, error } = await supabase.from("time_tracker").select("*");
 
     if (error) {
