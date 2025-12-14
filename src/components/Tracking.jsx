@@ -21,7 +21,7 @@ const Tracking = () => {
   const submitTracking = async (data) => {
     data.preventDefault();
     const timeData = new FormData(data.target);
-
+    console.log([...timeData.entries()]);
     const timeEntry = {
       from: timeData.get("from"),
       to: timeData.get("to"),
@@ -30,7 +30,6 @@ const Tracking = () => {
       fun_level: timeData.get("fun-level"),
       meaning_level: timeData.get("meaning-level"),
     };
-
     const { error } = await supabase.from("time_tracker").insert([timeEntry]);
 
     if (error) {
