@@ -40,20 +40,19 @@ const Tracking = () => {
   };
 
   const getData = async () => {
-    const categoryDisplay = document.getElementById("current-category");
-    const timesheet = document
-      .getElementById("timesheet")
-      .getElementsByTagName("tbody")[0];
+    onsole.log("getData called");
+    // const categoryDisplay = document.getElementById("current-category");
+    // const timesheet = document
+    //   .getElementById("timesheet")
+    //   .getElementsByTagName("tbody")[0];
 
-    let { data: time_tracker, error } = await supabase
-      .from("time_tracker")
-      .select("*");
+    const { data, error } = await supabase.from("time_tracker").select("*");
 
     if (error) {
-        console.log("Error fetching time entries:", error);
+      console.error(error);
+    } else {
+      console.log("Fetched:", data);
     }
-    
-    console.log(time_tracker);
 
     // const timeBlock = timesheet.insertRow();
     // const timeCell = timeBlock.insertCell(0);
