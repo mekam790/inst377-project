@@ -24,7 +24,7 @@ const Tracking = () => {
       .from("time-tracker")
       .insert([data]);
     if (error) {
-      console.error("Error submitting form:", error);
+      console.log("Error submitting form:", error);
       return;
     }
   };
@@ -57,11 +57,12 @@ const Tracking = () => {
         <h5 id="current-category"></h5>
       </div>
       <form id="tracking-form" action={submitTracking}>
+        {/* can have min and max attributes, use to set restrictions when user first inputs sleep time*/}
         <label for="from">Time Block Start:</label>
-        <input type="text" id="from" required />
+        <input type="time" id="from" step="1800" required />
         <br />
         <label for="to">Time Block End:</label>
-        <input type="text" id="to" required />
+        <input type="time" id="to" step="1800" required />
         <br />
         <label for="activity">Activity:</label>
         <input type="text" id="activity" required />
