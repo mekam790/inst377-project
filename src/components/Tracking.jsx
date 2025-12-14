@@ -48,6 +48,10 @@ const Tracking = () => {
     let { data: time_tracker, error } = await supabase
       .from("time_tracker")
       .select("*");
+
+    if (error) {
+        console.log("Error fetching time entries:", error);
+    }
     
     console.log(time_tracker);
 
