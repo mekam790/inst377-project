@@ -1,7 +1,7 @@
 import React from "react";
 import "../App.css";
-import Navbar from "./Navbar";
-import moment from "moment";
+import Navbar from "../components/Navbar";
+// import moment from "moment";
 import Clock from "react-live-clock";
 import { createClient } from "@supabase/supabase-js";
 
@@ -16,8 +16,6 @@ const Tracking = () => {
   const date = new Date();
   const showDate =
     date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
-  const showTime =
-    date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 
   // function to get sleep time and set min and max for time inputs
   const getSleepTime = (data) => {
@@ -71,9 +69,9 @@ const Tracking = () => {
     const { data, error } = await supabase.from("time_tracker").select("*");
 
     if (error) {
-      console.error(error);
+      console.log(error);
     } else {
-      console.log("Fetched:", data);
+      console.log(data);
     }
 
     data.forEach((entry) => {
@@ -112,6 +110,12 @@ const Tracking = () => {
         {/* not dynamic yet*/}
         <h3>Current Date: {showDate}</h3>
       </div>
+      <div id="timebox">
+        <h3>Current Time:</h3>
+        <Clock format={"HH:mm:ss"} ticking={true} timezone={"US/Eastern"} />
+        <h3>Current Category:</h3>
+        <h5 id="current-category"></h5>
+      </div>
       <div id="sleepbox">
         <h2>Sleep Time Entry</h2>
         <p>Input your sleeping hours to restrict the hours you track.</p>
@@ -137,10 +141,6 @@ const Tracking = () => {
           <button type="submit">Submit</button>
         </form>
         <h3 id="sleep_confirm"></h3>
-      </div>
-      <div id="timebox">
-        <Clock format={"HH:mm:ss"} ticking={true} timezone={"US/Eastern"} />
-        <h5 id="current-category"></h5>
       </div>
       <div id="form">
         <form id="tracking-form" onSubmit={submitTracking}>
