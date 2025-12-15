@@ -2,6 +2,7 @@ import React from "react";
 import "../App.css";
 import Navbar from "./Navbar";
 import moment from "moment";
+import Clock from "react-live-clock";
 import { createClient } from "@supabase/supabase-js";
 
 const Tracking = () => {
@@ -33,7 +34,8 @@ const Tracking = () => {
     timeTo.min = sleepTo;
     timeTo.max = sleepFrom;
 
-    confirmation.innerHTML = "Sleep time set from " + sleepFrom + " to " + sleepTo;
+    confirmation.innerHTML =
+      "Sleep time set from " + sleepFrom + " to " + sleepTo;
   };
 
   // function when form is submitted
@@ -137,7 +139,7 @@ const Tracking = () => {
         <h3 id="sleep_confirm"></h3>
       </div>
       <div id="timebox">
-        <h3>{showTime}</h3>
+        <Clock format={"HH:mm:ss"} ticking={true} timezone={"US/Eastern"} />
         <h5 id="current-category"></h5>
       </div>
       <div id="form">
