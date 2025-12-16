@@ -2,7 +2,7 @@ import React from "react";
 import "../App.css";
 import Navbar from "../components/Navbar";
 // import moment from "moment";
-import { Clock } from 'react-live-clock';
+import Clock from 'react-live-clock';
 import { createClient } from "@supabase/supabase-js";
 
 const Tracking = () => {
