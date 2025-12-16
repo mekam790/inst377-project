@@ -132,7 +132,8 @@ const Metrics = () => {
 
       if (!levels[key]) levels[key] = { total: 0, count: 0, colors: [] };
 
-      const value = type === "fun_level" ? entry.fun_level : entry.meaning_level;
+      const value =
+        type === "fun_level" ? entry.fun_level : entry.meaning_level;
       levels[key].total += value;
       levels[key].count += 1;
       levels[key].colors.push(categoryColors[entry.category] || "gray");
@@ -175,9 +176,9 @@ const Metrics = () => {
       </div>
       <div id="metric_info">
         <p>
-          Here, you will be able to see your time tracking metrics after
-          completing your 2-week sprint. This page will provide insights into
-          how you spent your time and help you identify areas for improvement.
+          Here, you can see your time tracking metrics after completing your
+          2-week sprint. This page will provide insights into how you spent your
+          time and help you identify areas for improvement.
         </p>
       </div>
       <div id="var_selection">
