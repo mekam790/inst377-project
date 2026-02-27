@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./components/Home";
-import About from "./components/About";
-import Metrics from "./components/Metrics";
-import Tracking from "./components/Tracking";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Metrics from "./pages/Metrics";
+import Tracking from "./pages/Tracking";
 import "./App.css";
 
 function App() {
